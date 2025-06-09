@@ -1,0 +1,39 @@
+nomor,server,template,pembaca_validasi,jenis_validasi
+1,tahun,tahun,tahun,required|numeric
+2,BULANDATA,BULANDATA,bulandata,required|numeric
+3,sandi,sandi,sandi,required|numeric
+4,Total Nominal Transaksi mean,Total Nominal Transaksi mean,total_nominal_transaksi_mean,required|numeric
+5,Total Nominal Transaksi std,Total Nominal Transaksi std,total_nominal_transaksi_std,required|numeric
+6,Total Nominal Transaksi min,Total Nominal Transaksi min,total_nominal_transaksi_min,required|numeric
+7,Total Nominal Transaksi max,Total Nominal Transaksi max,total_nominal_transaksi_max,required|numeric
+8,Total Nominal Transaksi sum,Total Nominal Transaksi sum,total_nominal_transaksi_sum,required|numeric
+9,Total Nominal Transaksi 25%,Total Nominal Transaksi 25%,total_nominal_transaksi_25,required|numeric
+10,Total Nominal Transaksi 50%,Total Nominal Transaksi 50%,total_nominal_transaksi_50,required|numeric
+11,Total Nominal Transaksi 75%,Total Nominal Transaksi 75%,total_nominal_transaksi_75,required|numeric
+12,Frekuensi Pengiriman mean,Frekuensi Pengiriman mean,frekuensi_pengiriman_mean,required|numeric
+13,Frekuensi Pengiriman std,Frekuensi Pengiriman std,frekuensi_pengiriman_std,required|numeric
+14,Frekuensi Pengiriman min,Frekuensi Pengiriman min,frekuensi_pengiriman_min,required|numeric
+15,Frekuensi Pengiriman max,Frekuensi Pengiriman max,frekuensi_pengiriman_max,required|numeric
+16,Frekuensi Pengiriman sum,Frekuensi Pengiriman sum,frekuensi_pengiriman_sum,required|numeric
+17,Frekuensi Pengiriman 25%,Frekuensi Pengiriman 25%,frekuensi_pengiriman_25,required|numeric
+18,Frekuensi Pengiriman 50%,Frekuensi Pengiriman 50%,frekuensi_pengiriman_50,required|numeric
+19,Frekuensi Pengiriman 75%,Frekuensi Pengiriman 75%,frekuensi_pengiriman_75,required|numeric
+20,Most Frequent City,Most Frequent Sender,most_frequent_sender,required|string|max:255
+21,,Most Frequent Receiver,most_frequent_receiver,required|string|max:255
+22,,Most Frequent City,most_frequent_city,required|numeric
+23,,Most Frequent Country,most_frequent_country,required|string|max:255
+24,Selisih Transaksi Outgoing-Incoming,Selisih Transaksi Outgoing-Incoming,selisih_transaksi_outgoing_incoming,required|numeric
+25,,pemegang_saham,pemegang_saham,nullable|string|max:255
+26,modal_disetor,modal_disetor,modal_disetor,nullable|numeric
+27,,kpwdn,kpwdn,nullable|string|max:255
+28,,pengurus,pengurus,nullable|string
+29,,pulau,pulau,nullable|string
+30,,provinsi,provinsi,nullable|string|max:255
+31,,kota,kota,nullable|string|max:255
+32,,NRA_APU,nra_apu,nullable|numeric
+33,other_sandi_related_through_receiver,other_sandi_related_through_receiver,other_sandi_related_through_receiver,nullable|integer
+34,other_sandi_related_through_sender,other_sandi_related_through_sender,other_sandi_related_through_sender,nullable|integer
+35,Total Nominal Transaksi mean_outlier,Total Nominal Transaksi mean_outlier,total_nominal_transaksi_mean_outlier,required|numeric
+36,Total Nominal Transaksi std_outlier,Total Nominal Transaksi std_outlier,total_nominal_transaksi_std_outlier,required|numeric
+37,Frekuensi Pengiriman mean_outlier,Frekuensi Pengiriman mean_outlier,frekuensi_pengiriman_mean_outlier,required|numeric
+38,Frekuensi Pengiriman std_outlier,Frekuensi Pengiriman std_outlier,frekuensi_pengiriman_std_outlier,required|numeric
