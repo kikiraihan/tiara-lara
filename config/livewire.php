@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'layout' => 'layouts.nra_raisa.app',
+    'layout' => 'layouts.tiara.app',
 
     /*
     |---------------------------------------------------------------------------
