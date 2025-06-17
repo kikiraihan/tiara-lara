@@ -7,5 +7,4 @@ import './bootstrap';
 // Alpine.start();
 
 import { createIcons, icons } from 'lucide';
-
 createIcons({ icons });

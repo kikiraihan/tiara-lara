@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIARA: Regulation Assistant</title>
-    <!-- Font Awesome -->
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> --}}
     {{-- boxicons --}}
     {{-- <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel='stylesheet'> --}}
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.1/lottie.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    {{-- <script src="https://unpkg.com/lucide@latest"></script> --}}
 
     {{-- we use lucide icon. instaled npm. check this documentation https://lucide.dev/guide/basics/stroke-width --}}
 
@@ -33,44 +34,23 @@
             border-left: 3px solid #3b82f6;
         }
     </style>
-
-    {{$stylehalaman}}
 </head>
 
+<body class="min-h-screen flex flex-col dark:bg-gray-900 dark:text-white">
 
-<body class="bg-gray-50">
-    @include('layouts.tiara.loading_screen')
+    {{$slot}}
 
-    <div class="flex h-screen">
-        <!-- Left Sidebar -->
-        @include('layouts.tiara.app_side')
-
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
-            {{-- @include('layouts.tiara.app_nav') --}}
-            
-
-            <!-- Main Content Area -->
-            <div class="flex-1 overflow-y-auto p-6">
-                {{$slot}}
-            </div>
-        </div>
-    </div>
-
-
-
-
-    @include('layouts.nra_raisa._darkmode_toggle_script')
-    @livewire('notifications')
+    @include('layouts.tiara._darkmode_toggle_script')
+    
     @filamentScripts
+
 
     <script>
         let pressedKeys = [];
         document.addEventListener('keydown', function(event) {
             pressedKeys.push(event.key);
             if (pressedKeys.includes('`') && pressedKeys.includes('1') ) {
-                window.location.href = '{{ route('landing.home') }}';
+                window.location.href = '{{ route('crud.loby') }}';
             }
         });
         document.addEventListener('keyup', function(event) {
@@ -80,8 +60,5 @@
             }
         });
     </script>
-
-    {{$scripthalaman}}
 </body>
-
 </html>

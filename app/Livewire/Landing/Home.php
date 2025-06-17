@@ -8,6 +8,8 @@ class Home extends Component
 {
     public function render()
     {
-        return view('livewire.landing.home')->layout('layouts.nra_raisa.guest');
+        return view('livewire.landing.home')
+        ->layout('layouts.tiara.guest')
+        ;
     }
 }

@@ -1,37 +1,40 @@
 <div class="dark:bg-gray-900 dark:text-white">
 
-    @include('layouts.nra_raisa.guest_nav')
+    {{-- @include('layouts.tiara.guest_nav') --}}
     <main class="flex-grow">
 
         <!-- Hero Section -->
         <section class="py-16 bg-gradient-to-l from-gradientLight1 to-gradientLight2 dark:from-gradientDark1 dark:to-gradientDark2">
             <div class="mx-auto px-20 py-3 flex flex-col-reverse md:grid md:grid-cols-2 items-center">
+            
+                <div>
+                    {{-- <x-senyawa.lottie-ilustration path="{{ asset('landing/image/knowledge-search.json') }}" id="ilustrasi_tiara"/> --}}
+                    <x-senyawa.lottie-ilustration path="{{ asset('landing/image/document-scan.json') }}" id="manajemen_model"/>
+                </div>
+
                 <div class="text-left text-raisaDongker1">
                     <h1 class="text-4xl font-bold mb-4 dark:text-raisaBlueLight">TIARA: Trusted Information Assistant for Regulation Access</h1>
                     <p class="dark:text-white text-md italic mb-2">Asisten AI untuk Akses Informasi Kebijakan Bank Indonesia</p>
                     <p class="dark:text-white text-lg mb-8">TIARA membantu menemukan jawaban berbasis dokumen kebijakan Bank Indonesia secara cerdas, cepat, dan referensial.</p>
                     <div class="flex justify-start space-x-4">
                         <a href="{{ route('login') }}" 
-                            class="px-6 py-2 font-bold bg-raisaDongker1 text-white hover:bg-raisaDongker2 dark:bg-raisaBlueLight dark:hover:bg-raisaDongker2 transition duration-300">
-                            Mulai Sekarang
+                            class="px-6 py-2 font-bold bg-raisaDongker1 text-white hover:bg-raisaDongker2 dark:bg-raisaBlueLight dark:hover:bg-raisaDongker2 transition duration-300 rounded-sm">
+                            Login
                         </a>
-                        <button
+                        {{-- <button id="darkModeToggle" class="p-2 rounded-sm bg-gray-300 hover:bg-blue-400 hover:bg-opacity-20 py-2 px-4">
+                        </button> --}}
+                        {{-- <button
                             class="px-6 py-2 font-bold text-raisaDongker1 border-2 border-raisaDongker1 hover:bg-raisaDongker1 hover:text-white transition duration-300 dark:border-raisaBlueLight dark:text-raisaBlueLight dark:hover:bg-raisaDongker2 dark:hover:border-raisaDongker2 dark:hover:text-white"
                             onclick="document.getElementById('features').scrollIntoView({ behavior: 'smooth' });">
                             Pelajari Lebih Lanjut
-                        </button>
+                        </button> --}}
                     </div>
-                </div>
-            
-                <div>
-                    {{-- <x-senyawa.lottie-ilustration path="{{ asset('landing/image/knowledge-search.json') }}" id="ilustrasi_tiara"/> --}}
-                    <x-senyawa.lottie-ilustration path="{{ asset('landing/image/seeking-development.json') }}" id="manajemen_model"/>
                 </div>
             </div>
         </section>
 
         <!-- Features Section -->
-        <section id="features" class="py-20 bg-gradient-to-bl from-gradientLight1 to-gradientLight2 dark:from-gradientDark1 dark:to-gradientDark2">
+        {{-- <section id="features" class="py-20 bg-gradient-to-bl from-gradientLight1 to-gradientLight2 dark:from-gradientDark1 dark:to-gradientDark2">
             <div class="mx-auto px-20 py-3">
                 <h2 class="text-3xl font-bold text-center mb-12">Apa yang Bisa Dilakukan TIARA?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -65,10 +68,10 @@
                     @endforeach
                 </div>
             </div>
-        </section>
+        </section> --}}
 
         <!-- How It Works Section -->
-        <section class="py-20">
+        {{-- <section class="py-20">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Bagaimana TIARA Bekerja?</h2>
                 
@@ -96,7 +99,7 @@
                     </li>
                 </ol>
             </div>
-        </section>
+        </section> --}}
     </main>
 
     <footer class="bg-gray-800 text-white py-8">
