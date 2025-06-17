@@ -30,7 +30,7 @@
         }
         .sidebar-item.active {
             background-color: rgba(59, 130, 246, 0.1);
-            border-left: 3px solid #3b82f6;
+            border-left: 3px solid #2a3f8c;
         }
     </style>
 

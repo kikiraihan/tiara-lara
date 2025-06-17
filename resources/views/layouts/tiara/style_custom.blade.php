@@ -1,4 +1,4 @@
-<style>
+{{-- <style>
     /* paksa ganti warna table filament */
     .fi-ta-ctn {
         /* background: #1B2330 !important; */
@@ -21,4 +21,4 @@
     [x-cloak] {
         display: none;
     }
-</style>
+</style> --}}

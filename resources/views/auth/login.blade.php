@@ -15,7 +15,8 @@
                 <div class="p-6">
                     <div class="text-center mb-6">
                         <div class="inline-block p-2 bg-raisaDongker1 text-white mb-4 rounded-full">
-                            <i class="fas fa-shield-alt text-3xl"></i>
+                            {{-- <i class="fas fa-shield-alt text-3xl"></i> --}}
+                            <x-tiara-logo/>
                         </div>
                         <h1 class="text-2xl font-bold text-gray-800 dark:text-gradientLight2">TIARA</h1>
                         <p class="text-sm text-gray-600 dark:text-gradientLight1">Trusted Information Assistant for Regulation Access</p>

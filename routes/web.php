@@ -7,6 +7,8 @@ use App\Livewire\CrudUser;
 use App\Livewire\CrudValidationModelDataset;
 use App\Livewire\Dashboard\Dashboard;
 use App\Livewire\DatasetResource\DatasetUploadForm;
+use App\Livewire\DocumentList;
+use App\Livewire\KnowledgeList;
 use App\Livewire\KupvaNraResource\CrudKupvaNra;
 use App\Livewire\KupvaProfilResource\CrudKupvaProfil;
 use App\Livewire\Landing\Home;
@@ -32,8 +34,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('landing.home');
 Route::get('/home', Loby::class)->middleware(['auth', 'verified'])->name('crud.loby');
-
+Route::get('/documents', DocumentList::class)->middleware(['auth', 'verified'])->name('crud.document');
+Route::get('/knowledges', KnowledgeList::class)->middleware(['auth', 'verified'])->name('crud.knowledge');
 Route::get('/resource/user', CrudUser::class)->middleware(['auth', 'verified'])->name('crud.user');
+
+
+
+// hapus nanti
 Route::get('/resource/dataset', CrudDataset::class)->middleware(['auth', 'verified'])->name('crud.dataset');
 Route::get('/resource/dataset/upload', DatasetUploadForm::class)->middleware(['auth', 'verified'])->name('crud.dataset.upload');
 Route::get('/resource/model', CrudModel::class)->middleware(['auth', 'verified'])->name('crud.model');
