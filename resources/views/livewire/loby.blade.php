@@ -11,7 +11,16 @@
     </script>
 </x-slot>
 
-<div class="max-w-6xl mx-auto">
+<div>
+    <div>Welcome</div> 
+
+    <div class="w-full h-full">
+        nice
+    </div>
+
+</div>
+
+{{-- <div class="max-w-6xl mx-auto">
     <div class="mb-6 flex justify-between items-center">
         <div>
             <p class="text-sm text-gray-500">Kelola dokumen kebijakan Bank Indonesia yang telah diunggah</p>
@@ -222,4 +231,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
