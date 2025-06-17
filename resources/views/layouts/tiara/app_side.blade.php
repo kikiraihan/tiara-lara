@@ -71,7 +71,7 @@
     <div class="p-4 border-t border-gray-200 mt-auto">
         <div class="flex items-center">
             <div class="flex-shrink-0">
-                <img class="h-10 w-10 rounded-full" src="https://ui-avatars.com/api/?name={{auth()->user()->name}}&background=3b82f6&color=fff" alt="avatar">
+                <img class="h-10 w-10 rounded-full" src="https://ui-avatars.com/api/?name={{auth()->user()->name}}&background=2a3f8c&color=fff" alt="avatar">
             </div>
             <div class="ml-3">
                 <p class="text-sm font-medium text-gray-700">{{auth()->user()->name}}</p>

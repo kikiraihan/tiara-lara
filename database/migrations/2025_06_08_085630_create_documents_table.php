@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('title',255);
             $table->string('category',255);
             $table->integer('total_pages');
+            $table->decimal('file_size',2);//in kilobyte
+            $table->enum('knowledge_status',['success','pending','failed','not_yet'])->default('not_yet');
             
             $table->boolean('is_private');
             $table->string('file_path',255);

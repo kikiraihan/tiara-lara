@@ -1,14 +1,14 @@
 <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-gray-500 dark:bg-gray-800 z-50">
-  <l-reuleaux
+  <l-squircle
     size="50"
     stroke="5"
     stroke-length="0.3"
     bg-opacity="0.1"
     speed="1.2"
     color="#2a3f8c" 
-  ></l-reuleaux>
+></l-squircle>
 </div>
-<script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/reuleaux.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/squircle.js"></script>
 
 {{-- loading screen --}}
 <script>
