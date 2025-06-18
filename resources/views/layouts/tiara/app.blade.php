@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIARA: Regulation Assistant</title>
     <!-- Font Awesome -->
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {{-- boxicons --}}
     {{-- <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel='stylesheet'> --}}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -32,13 +32,17 @@
             background-color: rgba(59, 130, 246, 0.1);
             border-left: 3px solid #2a3f8c;
         }
+        .dark .sidebar-item.active {
+            background-color: rgba(59, 130, 246, 0.2); /* lebih terang untuk dark */
+            border-left-color: #93c5fd; /* warna biru muda */
+        }
     </style>
 
     {{$stylehalaman}}
 </head>
 
 
-<body class="bg-gray-50">
+<body class="bg-gray-50 dark:bg-gray-900 dark:text-white">
     @include('layouts.tiara.loading_screen')
 
     <div class="flex h-screen">
@@ -52,7 +56,7 @@
             
 
             <!-- Main Content Area -->
-            <div class="flex-1 overflow-y-auto p-6">
+            <div class="flex-1 overflow-y-auto p-6 dark:bg-gray-800 dark:text-gray-100">
                 {{$slot}}
             </div>
         </div>

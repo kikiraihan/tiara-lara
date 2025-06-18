@@ -21,8 +21,8 @@
                             class="px-6 py-2 font-bold bg-raisaDongker1 text-white hover:bg-raisaDongker2 dark:bg-raisaBlueLight dark:hover:bg-raisaDongker2 transition duration-300 rounded-sm">
                             Login
                         </a>
-                        {{-- <button id="darkModeToggle" class="p-2 rounded-sm bg-gray-300 hover:bg-blue-400 hover:bg-opacity-20 py-2 px-4">
-                        </button> --}}
+                        <button id="darkModeToggle" class="p-2 rounded-sm bg-gray-300 hover:bg-blue-400 dark:hover:bg-blue-200 hover:bg-opacity-20 py-2 px-4">
+                        </button>
                         {{-- <button
                             class="px-6 py-2 font-bold text-raisaDongker1 border-2 border-raisaDongker1 hover:bg-raisaDongker1 hover:text-white transition duration-300 dark:border-raisaBlueLight dark:text-raisaBlueLight dark:hover:bg-raisaDongker2 dark:hover:border-raisaDongker2 dark:hover:text-white"
                             onclick="document.getElementById('features').scrollIntoView({ behavior: 'smooth' });">
