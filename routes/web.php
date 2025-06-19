@@ -42,6 +42,12 @@ Route::get('/resource/user', CrudUser::class)->middleware(['auth', 'verified'])-
 
 
 
+
+
+
+
+
+
 // hapus nanti
 Route::get('/resource/dataset', CrudDataset::class)->middleware(['auth', 'verified'])->name('crud.dataset');
 Route::get('/resource/dataset/upload', DatasetUploadForm::class)->middleware(['auth', 'verified'])->name('crud.dataset.upload');

@@ -20,11 +20,11 @@
                 'text' => 'Home',
                 'href' => route('crud.loby'),
             ],
-            // [
-            //     'icon' => 'upload',
-            //     'text' => 'Upload Dokumen',
-            //     'href' => 'admin-upload.html',
-            // ],
+            [
+                'icon' => 'upload',
+                'text' => 'Upload Dokumen',
+                'href' => route('crud.document.upload'),
+            ],
             [
                 'icon' => 'Files',
                 'text' => 'Dokumen',

@@ -73,7 +73,7 @@ class PageDocumentList extends Component implements HasForms, HasTable
             ])
             ->headerActions([
                 Action::make('upload')
-                    ->label('Upload PDF')
+                    ->label('Upload Dokumen')
                     ->color('primary')
                     ->form($this->createForm())
                     // ->action(fn(array $data) => $this->uploadPDF($data)),
