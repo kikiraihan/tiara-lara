@@ -1,18 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Livewire\DatasetResource\CrudDataset;
-use App\Livewire\CrudModel;
 use App\Livewire\CrudUser;
 use App\Livewire\DocumentResource\PageDocumentList;
 use App\Livewire\DocumentResource\PageDocumentUploadForm;
 use App\Livewire\KnowledgeList;
-use App\Livewire\KupvaNraResource\CrudKupvaNra;
-use App\Livewire\KupvaProfilResource\CrudKupvaProfil;
 use App\Livewire\Landing\Home;
 use App\Livewire\Loby;
-use App\Livewire\PjpNraResource\CrudPjpNra;
-use App\Livewire\PjpProfilResource\CrudPjpProfil;
 use Illuminate\Support\Facades\Route;
 
 /*
