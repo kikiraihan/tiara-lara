@@ -40,29 +40,6 @@ Route::get('/resource/documents/upload', PageDocumentUploadForm::class)->middlew
 Route::get('/knowledges', KnowledgeList::class)->middleware(['auth', 'verified'])->name('crud.knowledge');
 Route::get('/resource/user', CrudUser::class)->middleware(['auth', 'verified'])->name('crud.user');
 
-
-
-
-
-
-
-
-
-// hapus nanti
-Route::get('/resource/dataset', CrudDataset::class)->middleware(['auth', 'verified'])->name('crud.dataset');
-Route::get('/resource/dataset/upload', DatasetUploadForm::class)->middleware(['auth', 'verified'])->name('crud.dataset.upload');
-Route::get('/resource/model', CrudModel::class)->middleware(['auth', 'verified'])->name('crud.model');
-// Route::get('/resource/validation-model-dataset', CrudValidationModelDataset::class)->middleware(['auth', 'verified'])->name('crud.validation-model-dataset');
-Route::get('/resource/kupva-profil', CrudKupvaProfil::class)->middleware(['auth', 'verified'])->name('crud.kupva-profil');
-Route::get('/resource/kupva-nra', CrudKupvaNra::class)->middleware(['auth', 'verified'])->name('crud.kupva-nra');
-Route::get('/resource/pjp-profil', CrudPjpProfil::class)->middleware(['auth', 'verified'])->name('crud.pjp-profil');
-Route::get('/resource/pjp-nra', CrudPjpNra::class)->middleware(['auth', 'verified'])->name('crud.pjp-nra');
-
-Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
