@@ -1,8 +1,6 @@
 <div class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 overflow-y-auto">
     <div class="p-4 border-b border-gray-200 dark:border-gray-700">
         <div class="flex items-center space-x-3">
-            {{-- <img src="https://img.favpng.com/24/14/21/bank-indonesia-central-bank-logo-png-favpng-fmrrs1thB28gyQieJKu6f7qxG.jpg" alt="BI Logo" class="h-8 w-8"> --}}
-            {{-- <div data-lucide="gem"></div> --}}
             <x-tiara-logo/>
             <div>
                 <h1 class="text-lg font-semibold text-gray-800 dark:text-white">TIARA</h1>

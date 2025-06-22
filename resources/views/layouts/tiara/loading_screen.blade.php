@@ -1,4 +1,4 @@
-<div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-gray-500 dark:bg-gray-800 z-50">
+<div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800 z-50">
   <l-squircle
     size="50"
     stroke="5"

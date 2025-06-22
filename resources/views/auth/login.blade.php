@@ -14,7 +14,7 @@
                 class="max-w-md mx-auto bg-white dark:bg-gradient-to-br dark:from-gradientDark1 dark:to-gradientDark2 shadow-md overflow-hidden">
                 <div class="p-6">
                     <div class="text-center mb-6">
-                        <div class="inline-block p-2 bg-raisaDongker1 text-white mb-4 rounded-full">
+                        <div class="inline-flex p-2 text-raisaDongker1 bg-gray-300 mb-4 rounded-full w-12 justify-center">
                             {{-- <i class="fas fa-shield-alt text-3xl"></i> --}}
                             <x-tiara-logo/>
                         </div>
