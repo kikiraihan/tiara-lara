@@ -34,9 +34,14 @@
                 'href' => route('crud.knowledge'),
             ],
             [
-                'icon' => 'User',
-                'text' => 'User',
+                'icon' => 'Users',
+                'text' => 'Users',
                 'href' => route('crud.user'),
+            ],
+            [
+                'icon' => 'User',
+                'text' => 'My Profile',
+                'href' => route('profile.edit'),
             ],
             // [
             //     'icon' => 'settings',

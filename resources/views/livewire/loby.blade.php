@@ -7,15 +7,13 @@
 
     <script>
         console.log(1)
-
     </script>
 </x-slot>
 
 <div>
-    <div>Welcome</div> 
+    <div>Welcome <span class="text-cyan-900">{{auth()->user()->name}}</span></div> 
 
     <div class="w-full h-full">
-        nice
     </div>
 
 </div>

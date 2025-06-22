@@ -4,9 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\DatasetResource\CrudDataset;
 use App\Livewire\CrudModel;
 use App\Livewire\CrudUser;
-use App\Livewire\CrudValidationModelDataset;
-use App\Livewire\Dashboard\Dashboard;
-use App\Livewire\DatasetResource\DatasetUploadForm;
 use App\Livewire\DocumentResource\PageDocumentList;
 use App\Livewire\DocumentResource\PageDocumentUploadForm;
 use App\Livewire\KnowledgeList;
@@ -40,14 +37,17 @@ Route::get('/resource/documents/upload', PageDocumentUploadForm::class)->middlew
 Route::get('/knowledges', KnowledgeList::class)->middleware(['auth', 'verified'])->name('crud.knowledge');
 Route::get('/resource/user', CrudUser::class)->middleware(['auth', 'verified'])->name('crud.user');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+
+// Route::get('/dashboard', function () {
+  //     return view('dashboard');
+  // })->middleware(['auth', 'verified'])->name('dashboard');
+  
+// BAWAAN LARAVEL
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 require __DIR__.'/auth.php';
