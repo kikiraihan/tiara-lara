@@ -21,12 +21,17 @@ class InferenceRepository extends BaseRepository{
         $this->setModel(User::class);
     }
     
+    function extract(){
+        
+    }
+
     // $t = model
     function infer($model=null, $data){
         if(!in_array($model, ModelMachineLearning::$MODELS)){
             throw new Error("Illegal model choice : $model");
         }
 
+        /* 
         $APP_MS3_ML_SVC_URL = env("APP_MS3_ML_SVC_URL");
         $flow = $data['f'];
         $action = $data['a'];
@@ -38,9 +43,10 @@ class InferenceRepository extends BaseRepository{
 
         $response = $response->json();
         // Log::info( preout($response) );
-        /* if($response){
+        if($response){
             $response = $response['data'];
-        } */
+            } */
+       $response = "test infer";
         return $response;
     }
 }

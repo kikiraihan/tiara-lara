@@ -64,6 +64,7 @@ trait UploadDocumentTrait
             $filename = uniqid('document_') . '.pdf';
 
             // Simpan file
+            // wip use env
             // $path = $file->storeAs('documents', $filename, 'var-shared'); // kalau di server
             $path = $file->storeAs('documents', $filename, 'public');
 

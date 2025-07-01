@@ -19,10 +19,14 @@ use Illuminate\Support\Collection;
 use Livewire\Component;
 use App\Livewire\DocumentResource\UploadDocumentTrait;
 use App\Livewire\DocumentResource\CrudDocumentTrait;
+use App\Repositories\InferenceRepository;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Concerns\InteractsWithInfolists;
+use Arr;
+use Illuminate\Support\Facades\Log;
+// use Log;
 
 class PageDocumentList extends Component implements HasForms, HasTable
 {
@@ -33,6 +37,15 @@ class PageDocumentList extends Component implements HasForms, HasTable
     use CrudDocumentTrait;
 
     public Model $record;
+
+    // beware of public var of component's instances
+    protected $inferenceRepository;
+
+
+    function __construct() {
+        $inferenceRepository = app()->get(InferenceRepository::class);
+        $this->inferenceRepository = $inferenceRepository;
+    }
 
     public function table(Table $table): Table
     {
@@ -51,6 +64,20 @@ class PageDocumentList extends Component implements HasForms, HasTable
                     ->label('Detail')
                     ->infolist($this->viewInfolist())
                     ->modalHeading('Informasi Dokumen'),
+                Action::make('proc')
+                    ->label('Proses')
+                    ->action(function (Model $record) {
+                        Log::info("infer1 arg");
+                        Log::info(json_encode($record));
+                    })
+                    /* ->action(
+                        function () {
+                        $log = app()->get(Log::class);
+                        preout($log);
+                        // logs("test proses");
+                        return;
+                    }) */
+                    ,
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -81,6 +108,56 @@ class PageDocumentList extends Component implements HasForms, HasTable
                     
             ])
             ->heading('Manajemen Dokumen');
+    }
+
+    function mountInfolistAction(string $name, string|null $component = null, string|null $infolist = null){
+        switch($name){
+            case "test1":
+                Log::info("$name $component");
+                // update the ui
+                
+            break;
+            case "proc":
+            case "extract":
+                Log::info("extract start");
+                $log = app()->get(Log::class);
+                preout($log);
+                Log::info("extract end");
+            break;
+            case "infer":
+            case "infer1":
+                Log::info("Infer start");
+                $record = $this->getMountedTableActionRecord();
+                $f = $record->model->name;
+                $r = 1;
+                
+                $r = $this->inferenceRepository->infer($f, [
+                    "f" => $f, 
+                    "a" => "user-infer",
+                    "file" => $record->file_path,
+                    // wip additional rules
+                ]);
+                
+                if( Arr::get($r, 'success') ){
+                    $evtn = 'infer-success';
+                    // $record->result = json_encode($r);
+                    // $record->save();
+                }else{
+                    $evtn = 'infer-fail';
+                }
+                $this->dispatch($evtn, [
+                    "data" => [
+                        "x" => 1,
+                        "r" => $r,
+                    ]
+                ]);
+
+                Log::info(json_encode($r));
+                Log::info("Infer complete");
+            break;
+            default:
+                Log::info("Unknown mnt infolist");
+        }
     }
 
     public function render(): View

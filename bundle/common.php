@@ -1,5 +1,7 @@
 <?php
 
+use Log;
+
 if (!function_exists('preout')) {
     function preout($v) {
         echo "<pre>";
@@ -27,6 +29,12 @@ if (!function_exists('preson')) {
 if (!function_exists('presonRet')) {
     function presonRet($v) {
         return json_encode($v,JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    }
+}
+
+if (!function_exists('logs')) {
+    function logs($v) {
+        Log::info($v);
     }
 }
 
