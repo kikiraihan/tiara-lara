@@ -40,6 +40,7 @@ class PageDocumentList extends Component implements HasForms, HasTable
 
     // beware of public var of component's instances
     protected $inferenceRepository;
+    protected $currentRecord;
 
 
     function __construct() {
@@ -49,6 +50,8 @@ class PageDocumentList extends Component implements HasForms, HasTable
 
     public function table(Table $table): Table
     {
+        $ctx = $this;
+
         return $table
             ->query(Document::query()->latest())
             ->columns([
@@ -66,11 +69,14 @@ class PageDocumentList extends Component implements HasForms, HasTable
                     ->modalHeading('Informasi Dokumen'),
                 Action::make('proc')
                     ->label('Proses')
-                    ->action(function (Model $record) {
+                    ->action(function (Model $record) use($ctx){
                         Log::info("infer1 arg");
+                        $ctx->setCurrentRecord($record);
                         Log::info(json_encode($record));
+                        $ctx->doAction('proc');
                     })
-                    /* ->action(
+                    /* 
+                        ->action(
                         function () {
                         $log = app()->get(Log::class);
                         preout($log);
@@ -110,7 +116,8 @@ class PageDocumentList extends Component implements HasForms, HasTable
             ->heading('Manajemen Dokumen');
     }
 
-    function mountInfolistAction(string $name, string|null $component = null, string|null $infolist = null){
+    function doAction(string $name, string|null $component = null, string|null $infolist = null){
+        Log::info("mountInfolistAction $name $component");
         switch($name){
             case "test1":
                 Log::info("$name $component");
@@ -119,10 +126,15 @@ class PageDocumentList extends Component implements HasForms, HasTable
             break;
             case "proc":
             case "extract":
+                $record = $this->getCurrentRecord();
                 Log::info("extract start");
-                $log = app()->get(Log::class);
-                preout($log);
+                Log::info($record);
                 Log::info("extract end");
+                $d = [
+                    "id" => $record->id,
+                    "file" => $record->file_path,
+                ];
+                $r = $this->inferenceRepository->extract($d);
             break;
             case "infer":
             case "infer1":
@@ -163,5 +175,25 @@ class PageDocumentList extends Component implements HasForms, HasTable
     public function render(): View
     {
         return view('livewire.document-resource.document-list');
+    }
+
+    /**
+     * Get the value of currentRecord
+     */ 
+    public function getCurrentRecord()
+    {
+        return $this->currentRecord;
+    }
+
+    /**
+     * Set the value of currentRecord
+     *
+     * @return  self
+     */ 
+    public function setCurrentRecord($currentRecord)
+    {
+        $this->currentRecord = $currentRecord;
+
+        return $this;
     }
 }

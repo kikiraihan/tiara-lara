@@ -20,9 +20,22 @@ class InferenceRepository extends BaseRepository{
     public function __construct(){
         $this->setModel(User::class);
     }
-    
-    function extract(){
+
+    function extract($data=null){
+        $APP_FA_ML_SVC_URL = env("APP_FA_ML_SVC_URL");
+
+        $response = Http::post("{$APP_FA_ML_SVC_URL}v1/p/extract/", $data);
         
+        Log::info($response->getBody());
+        Log::info($response->json());
+
+        $response = $response->json();
+        // Log::info( preout($response) );
+        if($response){
+            $response = $response['data'];
+        }
+        $response = "test infer";
+        return $response;
     }
 
     // $t = model
@@ -30,6 +43,8 @@ class InferenceRepository extends BaseRepository{
         if(!in_array($model, ModelMachineLearning::$MODELS)){
             throw new Error("Illegal model choice : $model");
         }
+        
+        $APP_FA_ML_SVC_URL = env("APP_FA_ML_SVC_URL");
 
         /* 
         $APP_MS3_ML_SVC_URL = env("APP_MS3_ML_SVC_URL");

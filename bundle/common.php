@@ -33,8 +33,9 @@ if (!function_exists('presonRet')) {
 }
 
 if (!function_exists('logs')) {
-    function logs($v) {
-        Log::info($v);
+    // logs(Log::class, $v);
+    function logs($c=Log::class, $v) {
+        $c::info($v);
     }
 }
 

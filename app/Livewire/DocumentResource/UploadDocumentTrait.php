@@ -11,6 +11,7 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 trait UploadDocumentTrait
 {
@@ -49,6 +50,8 @@ trait UploadDocumentTrait
 
     public function uploadPDF(array $data, $formComponent)
     {
+        $USE_SHARED_DIR = env("USE_SHARED_DIR") === 1;
+
         try {
             $file = $data['uploadpdf'];
 
@@ -61,12 +64,17 @@ trait UploadDocumentTrait
                     ->send();
             }
 
-            $filename = uniqid('document_') . '.pdf';
+            $date = Carbon::now()->format("Y-m-d_H-i-s");
+            $filename = $date."-".uniqid('document_') . '.pdf';
 
             // Simpan file
             // wip use env
-            // $path = $file->storeAs('documents', $filename, 'var-shared'); // kalau di server
             $path = $file->storeAs('documents', $filename, 'public');
+            if($USE_SHARED_DIR){
+                // kalau di server
+                // APP_DCK_SHARED_DIR = /var/shared/documents
+                $path = $file->storeAs('documents', $filename, 'var-shared');
+            }
 
             // Hitung total halaman (opsional — jika bisa pakai library pembaca PDF)
 
@@ -75,7 +83,7 @@ trait UploadDocumentTrait
                 'title' => $data['title'],
                 'category' => $data['category'],
                 'is_private' => $data['is_private'] ?? false,
-                'file_path' => $path,
+                'file_path' => $filename,
                 'total_pages' => null, // atau isi jika punya logic hitung halaman
                 'file_size' => null, // atau isi jika punya logic hitung halaman
             ]);
