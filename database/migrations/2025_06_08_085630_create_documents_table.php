@@ -21,6 +21,8 @@ return new class extends Migration
             
             $table->boolean('is_private');
             $table->string('file_path',255);
+            $table->timestamp('last_proc_at')->nullable()
+                ->comment("Last time the doc is processed");
 
             $table->timestamps();
         });

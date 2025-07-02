@@ -134,7 +134,10 @@ class PageDocumentList extends Component implements HasForms, HasTable
                     "id" => $record->id,
                     "file" => $record->file_path,
                 ];
-                $r = $this->inferenceRepository->extract($d);
+
+                Log::info("extract conditional push");
+                // $r = $this->inferenceRepository->extract($d);
+                $r = $this->inferenceRepository->conditionalPush();
             break;
             case "infer":
             case "infer1":

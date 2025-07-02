@@ -25,6 +25,7 @@ class Document extends Model
         'file_path', // STRING, NOT NULL,
         'created_at', // DATETIME, NULLABLE,
         'updated_at', // DATETIME, NULLABLE
+        'last_proc_at', // DATETIME, NULLABLE
     ];
 
 

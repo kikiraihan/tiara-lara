@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Jobs\ExtractJob;
 use App\Models\ModelMachineLearning;
 use Illuminate\Support\Facades\Http;
 
@@ -21,9 +22,19 @@ class InferenceRepository extends BaseRepository{
         $this->setModel(User::class);
     }
 
+    function conditionalPush($t=1, $data=null){
+        // push job to amqp t1
+        ExtractJob::dispatch()->onQueue('rabbitmq');
+
+        $this->sendToCelery();
+
+        return 1;
+    }
+
     function extract($data=null){
         $APP_FA_ML_SVC_URL = env("APP_FA_ML_SVC_URL");
 
+        // wip use bg job
         $response = Http::post("{$APP_FA_ML_SVC_URL}v1/p/extract/", $data);
         
         Log::info($response->getBody());
