@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\Queue; // Use the Queue facade to get the connect
 use Illuminate\Support\Str; // For UUID generation
 use PhpAmqpLib\Message\AMQPMessage; // Import AMQPMessage for message creation
 use DB;
+use Log;
+use PgSql\Lob;
+use Predis\Client as PredisClient;
+
+use Smuuf\CeleryForPhp\Celery;
+use Smuuf\CeleryForPhp\TaskSignature;
+use Smuuf\CeleryForPhp\Brokers\AmqpBroker;
+use Smuuf\CeleryForPhp\Drivers\PredisRedisDriver;
+use Smuuf\CeleryForPhp\Drivers\PhpAmqpLibAmqpDriver;
+use PhpAmqpLib\Connection\AMQPConnection;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Connection\AMQPSSLConnection;
+use Smuuf\CeleryForPhp\Backends\RedisBackend;
 
 class BaseRepository implements BaseRepositoryInterface
 {
@@ -36,6 +49,53 @@ class BaseRepository implements BaseRepositoryInterface
 		return $this;
 	}
 
+    function sendToCeleryx() { 
+
+        $c = config("queue.connections.rabbitmq.hosts.0");
+        $host = $c['host'];
+        $port = $c['port'];
+        $user = $c['user'];
+        $pwd = $c['password'];
+        Log::info($c);
+        
+        // wip use dep injection for amqp connection
+        $amqpConn = new AMQPStreamConnection($host, 
+            $port, 
+            $user,
+            $pwd,
+            '/');
+        // $amqpConn = new AMQPSSLConnection(['127.0.0.1', '5672', '', '', '/', ['verify_peer'=>false]]);
+        $amqpDriver = new PhpAmqpLibAmqpDriver($amqpConn);
+
+        $predis = new PredisClient(['host' => 'host.docker.internal']);
+        $redisDriver = new PredisRedisDriver($predis);
+
+        $celery = new Celery(
+            new AmqpBroker($amqpDriver),
+            new RedisBackend($redisDriver),
+            // Optionally explicit config object.
+            // config: new \Smuuf\CeleryForPhp\Config(...)
+        );
+
+        $task = new TaskSignature(
+            taskName: 'worker.t1',
+            queue: 'celery', // Optional, 'celery' by default.
+            args: [1, 3, 5],
+            // kwargs: ['arg_a' => 123, 'arg_b' => 'something'],
+            // eta: 'now +10 minutes',
+            // ... or more optional arguments.
+        );
+
+        // Send the task into Celery.
+        $asyncResult = $celery->sendTask($task);
+
+        // Wait for the result (up to 10 seconds by default) and return it.
+        // Alternatively a \Smuuf\CeleryForPhp\Exc\CeleryTimeoutException exception will
+        // be thrown if the task won't finish in time.
+        // $result = $asyncResult->get();
+        // $result === 9
+    }
+
     function sendToCelery() {
         // Get the RabbitMQ connection instance
         // This gives you access to the underlying PhpAmqpLib objects
@@ -52,11 +112,13 @@ class BaseRepository implements BaseRepositoryInterface
         // e.g., if your worker is at /app/workers/celery_app.py
         // and 'your_module' is '/app/workers', then it's 'your_module.celery_app.t1'
         // ----------------------------------------------------
-        $taskNameT1 = 'worker.worker.t1';
+        // routing_key
+        $taskNameT1 = 'worker.t1';
         $argsT1 = ['hello from Laravel', 123];
         $kwargsT1 = ['source' => 'Laravel'];
 
-        $taskNameT2 = 'worker.worker.t2';
+        // routing_key
+        $taskNameT2 = 'worker.t2';
         $argsT2 = ['another message'];
         $kwargsT2 = ['priority' => 'high'];
 
@@ -75,7 +137,8 @@ class BaseRepository implements BaseRepositoryInterface
                 'routing_key' => $queueName,
             ]];
 
-            $celeryBodyEncoded = base64_encode(json_encode($celeryBodyArray));
+            // $celeryBodyEncoded = base64_encode(json_encode($celeryBodyArray));
+            $celeryBodyEncoded = json_encode($celeryBodyArray);
 
             // Celery message headers
             $celeryHeaders = [
@@ -103,7 +166,7 @@ class BaseRepository implements BaseRepositoryInterface
             // Properties for the AMQP message itself
             $properties = [
                 'content_type' => 'application/json',
-                'content_encoding' => 'binary',
+                // 'content_encoding' => 'binary',
                 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, // Make messages durable
                 'headers' => new \PhpAmqpLib\Wire\AMQPTable($celeryHeaders),
             ];

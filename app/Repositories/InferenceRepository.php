@@ -26,7 +26,8 @@ class InferenceRepository extends BaseRepository{
         // push job to amqp t1
         ExtractJob::dispatch()->onQueue('rabbitmq');
 
-        $this->sendToCelery();
+        // $this->sendToCelery();
+        $this->sendToCeleryx();
 
         return 1;
     }

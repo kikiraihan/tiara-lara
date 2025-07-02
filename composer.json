@@ -21,6 +21,8 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.5",
         "maatwebsite/excel": "^3.1",
+        "predis/predis": "^3.0",
+        "smuuf/celery-for-php": "^0.3.0",
         "spatie/laravel-permission": "^6.10",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.2"
     },
