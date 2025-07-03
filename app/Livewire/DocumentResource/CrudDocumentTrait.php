@@ -10,6 +10,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Storage;
+use Log;
 
 trait CrudDocumentTrait
 {
@@ -42,6 +43,9 @@ trait CrudDocumentTrait
 
     public function viewInfolist()
     {
+        $fexist  = function($f){
+            return Storage::disk('var-shared')->exists($f);
+        };
         return [
             Section::make('Informasi Dokumen')
                 ->schema([
@@ -53,6 +57,12 @@ trait CrudDocumentTrait
                         ->formatStateUsing(fn (bool $state) => $state ? 'Ya' : 'Tidak'),
                     TextEntry::make('created_at')->label('Dibuat'),
                     TextEntry::make('updated_at')->label('Diubah Terakhir'),
+                    TextEntry::make('file_path')
+                        ->label('File exist')
+                        ->formatStateUsing(function(string $state) use ($fexist){
+                            Log::info(["file_path", $state]);
+                            return $fexist("documents/$state") ? "true" : "false";
+                    }),
                 ])
         ];
     }
