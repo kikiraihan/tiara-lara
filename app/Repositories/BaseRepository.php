@@ -59,7 +59,7 @@ class BaseRepository implements BaseRepositoryInterface
         $port = $c['port'];
         $user = $c['user'];
         $pwd = $c['password'];
-        Log::info($c);
+        // Log::info($c);
         
         // wip use dep injection for amqp connection
         $amqpConn = new AMQPStreamConnection($host, 

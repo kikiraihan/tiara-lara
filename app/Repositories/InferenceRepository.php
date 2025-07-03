@@ -17,26 +17,39 @@ use Illuminate\Support\Facades\Log;
 class InferenceRepository extends BaseRepository{
     use CRUDRepoTrait;
     protected $mainTable = "users";
+    protected $method = "req";
 
     public function __construct(){
         $this->setModel(User::class);
+
+        $this->setMethod(config("app.extract.method"));
     }
 
     function conditionalPush($t=1, $data=null){
         // push job to amqp t1
-        ExtractJob::dispatch()->onQueue('rabbitmq');
+        $method  = $this->getMethod();
+        $r = null;
+        
+        switch($method){
+            case "celery":
+                ExtractJob::dispatch()->onQueue('rabbitmq');
+                $r = $this->sendToCeleryx();
+            break;
+            case "req":
+            default:
+                $r = $this->extract($data);
+        }
 
-        // $this->sendToCelery();
-        $this->sendToCeleryx();
-
-        return 1;
+        return $r;
     }
 
     function extract($data=null){
         $APP_FA_ML_SVC_URL = env("APP_FA_ML_SVC_URL");
 
         // wip use bg job
-        $response = Http::post("{$APP_FA_ML_SVC_URL}v1/p/extract/", $data);
+        $response = Http::baseUrl($APP_FA_ML_SVC_URL)
+            ->timeout(60)
+            ->asJson()->post("/v1/p/extract", $data);
         
         Log::info($response->getBody());
         Log::info($response->json());
@@ -75,5 +88,25 @@ class InferenceRepository extends BaseRepository{
             } */
        $response = "test infer";
         return $response;
+    }
+
+    /**
+     * Get the value of method
+     */ 
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Set the value of method
+     *
+     * @return  self
+     */ 
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
     }
 }

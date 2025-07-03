@@ -61,6 +61,7 @@ class PageDocumentList extends Component implements HasForms, HasTable
                 Tables\Columns\IconColumn::make('is_private')->boolean(),
                 Tables\Columns\TextColumn::make('file_path')->limit(20),
                 Tables\Columns\TextColumn::make('created_at')->since()->sortable(),
+                Tables\Columns\TextColumn::make('last_proc_at')->since()->sortable(),
             ])
             ->actions([
                 Action::make('view')
@@ -137,7 +138,7 @@ class PageDocumentList extends Component implements HasForms, HasTable
 
                 Log::info("extract conditional push");
                 // $r = $this->inferenceRepository->extract($d);
-                $r = $this->inferenceRepository->conditionalPush();
+                $r = $this->inferenceRepository->conditionalPush(1, $d);
             break;
             case "infer":
             case "infer1":

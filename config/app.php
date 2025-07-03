@@ -191,4 +191,10 @@ return [
         "Redis" => Illuminate\Support\Facades\Redis::class,
     ])->toArray(),
 
+    // tiara confs
+    'extract' => [
+        // # celery | req | direct
+        // config("app.extract.method")
+        'method' => env("APP_EXTRACT_METHOD", "req"),
+    ]
 ];
