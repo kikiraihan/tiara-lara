@@ -4,11 +4,13 @@ namespace App\Repositories;
 
 use App\Repositories\Contracts\BaseRepositoryInterface;
 
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Queue; // Use the Queue facade to get the connection
 use Illuminate\Support\Str; // For UUID generation
 use PhpAmqpLib\Message\AMQPMessage; // Import AMQPMessage for message creation
 use DB;
 use Log;
+
 use PgSql\Lob;
 use Predis\Client as PredisClient;
 
@@ -21,6 +23,7 @@ use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Connection\AMQPSSLConnection;
 use Smuuf\CeleryForPhp\Backends\RedisBackend;
+
 
 class BaseRepository implements BaseRepositoryInterface
 {
@@ -50,7 +53,7 @@ class BaseRepository implements BaseRepositoryInterface
 	}
 
     function sendToCeleryx() { 
-
+        
         $c = config("queue.connections.rabbitmq.hosts.0");
         $host = $c['host'];
         $port = $c['port'];
@@ -67,8 +70,10 @@ class BaseRepository implements BaseRepositoryInterface
         // $amqpConn = new AMQPSSLConnection(['127.0.0.1', '5672', '', '', '/', ['verify_peer'=>false]]);
         $amqpDriver = new PhpAmqpLibAmqpDriver($amqpConn);
 
-        $predis = new PredisClient(['host' => 'host.docker.internal']);
-        $redisDriver = new PredisRedisDriver($predis);
+        // $predis = new PredisClient(['host' => 'host.docker.internal']);
+        Log::info(["Redis::class", Redis::class]);
+        $predis = Redis::connection();
+        $redisDriver = new PredisRedisDriver($predis->client());
 
         $celery = new Celery(
             new AmqpBroker($amqpDriver),
